@@ -94,7 +94,7 @@ WHERE varsta BETWEEN 23 AND 33
 ORDER BY varsta;
 
 
-C7. sa se afizeze media varstei userilor blocati 
+--C7. sa se afizeze media varstei userilor blocati 
 
 SELECT AVG(varsta) AS medie_varsta
 FROM users
@@ -102,7 +102,7 @@ WHERE blocat = true;
 
 
 
-C8.  sa se afiseze userii neblocati din dej 
+--C8.  sa se afiseze userii neblocati din dej 
 
 SELECT username, oras
 FROM users
@@ -110,7 +110,7 @@ WHERE blocat = false AND oras = 'Dej';
 
 
 
-C9. sa se afiseze postarile 
+--C9. sa se afiseze postarile 
 userilor neblocati din turda care au varsta peste 40 de ani 
 
 SELECT postari.mesaj, postari.data_postarii 
@@ -119,7 +119,7 @@ INNER JOIN users
 ON users.id_user = postari.fk_user
 WHERE users.blocat = false AND users.oras = 'Turda' AND users.varsta > 40;
 
-C10. sa sa afiseze userul cu cele mai multe postari 
+--C10. sa sa afiseze userul cu cele mai multe postari 
 
 
 SELECT COUNT(postari.fk_user), users.username
@@ -141,7 +141,7 @@ JOIN users
 ON users.id_user = postari.fk_user
 WHERE username LIKE 'D%' AND (postari.data_postarii > '20160301' AND postari.data_postarii < '20160331'); 
 
-
+--C12. sa se afiseze postarile ordonate dupa data postarii descendent, indiferent de user 
 
 SELECT mesaj, username, data_postarii
 FROM postari
@@ -149,11 +149,11 @@ JOIN users
 ON users.id_user = postari.fk_user
 ORDER BY data_Postarii DESC;
 
-
+--C13. sa se stearga postarile userilor sub 18 ani care contin  textul ‘politica’
 
 DELETE FROM postari 
 USING users
-WHERE users.id_user = postari.fk_user AND postari.mesaj LIKE '%Hello%' AND users.varsta < 25;
+WHERE users.id_user = postari.fk_user AND postari.mesaj LIKE '%politica%' AND users.varsta < 25;
 
 
 
